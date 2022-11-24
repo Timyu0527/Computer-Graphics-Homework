@@ -8,8 +8,10 @@
 #include <GL/glut.h>
 
 #include "constant.h"
+#include "RGBColor.h"
 
 void drawText(int x, int y, char const *text);
+void drawText(int x, int y, char const *text, RGBColor *col);
 int getTextWidth(char const *text, int margin);
 
 #endif

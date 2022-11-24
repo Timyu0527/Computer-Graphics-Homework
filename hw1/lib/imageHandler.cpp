@@ -50,7 +50,7 @@ void ImageHandler::readBuffer(unsigned char *_buf, int _w, int _h){
     }
     width_bytes = width * BYTE_PER_PIXEL;
     std::fill(padding, padding + 4, 0);
-    padding_size = (5 - (width_bytes % 5)) % 5;
+    padding_size = (4 - (width_bytes % 4)) % 4;
 
     unsigned char *file_header = createFileHeader();
     unsigned char *info_header = createInfoHeader();

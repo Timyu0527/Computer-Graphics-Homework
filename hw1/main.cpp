@@ -145,6 +145,7 @@ void reshape_func(int new_w, int new_h){
 void keyboard_func(unsigned char key, int x, int y){
     if(!buffer.empty()){
         if(obj_type == OBJ_TYPE::TEXT && !buffer.back()->isFinish()){
+            buffer.back()->setColor(RGBColor::obj_col);
             buffer.back()->addChar(key);
         }
     }
@@ -156,7 +157,7 @@ void mouse_func(int button, int state, int x, int y){
         isAttach = navbar->attach(x, wnd_height - y);
         if(!isAttach && !navbar->isMouseOn(x, wnd_height - y)){
             if((buffer.empty() || buffer.back()->isFinish())){
-                std::cout << "add" << std::endl;
+                // std::cout << "add" << std::endl;
                 switch(obj_type){
                     case OBJ_TYPE::MY_POINT:
                         buffer.push_back(new Point());
@@ -221,8 +222,7 @@ void passive_motion_func(int x, int y){
 void display_func(void){
     glClear(GL_COLOR_BUFFER_BIT);
 
-    std::cout << "display" << std::endl;
-    // if(isBlend) drawBackBuffer();
+    if(isBlend) drawBackBuffer();
     drawGrid();
     drawObject();
     navbar->draw();
@@ -363,11 +363,11 @@ void setEntry(){
     file_m->addMenuEntry("export", []() -> void {
         glClear(GL_COLOR_BUFFER_BIT);
 
-        drawBackBuffer();
+        if(isBlend) drawBackBuffer();
         drawObject();
 
         glReadPixels(0, 0, buf_w, buf_h, GL_RGBA, GL_UNSIGNED_BYTE, image);
-
+        std::cout << buf_w << " " << buf_h << std::endl;
         ImageHandler::img_hdr.readBuffer(image, buf_w, buf_h);
         ImageHandler::img_hdr.outputImage("picture.bmp");
 
