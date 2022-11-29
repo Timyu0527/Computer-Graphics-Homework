@@ -39,6 +39,10 @@
 
 #define ROBOT_SIZE 0.75
 
+#define CAMERA_NEAR 1.5
+#define CAMERA_FAR 30.0
+#define CAMERA_ANGLE 30.0
+
 const float PI = acos(-1.0);
 
 enum MOVE_DIRECTION{
